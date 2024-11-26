@@ -106,11 +106,11 @@ fi
 
 # we can proceed with the installation
 echo ">>> Refreshing package cache. This may take several minutes..."
-opkg update -V0
+apk update
 
 # Try to install lua-argparse if possible...
 lua_argparse=''
-if [ "$(opkg find lua-argparse | wc -l)" = "1" ]; then
+if [ "$(apk search lua-argparse | wc -l)" = "1" ]; then
     lua_argparse='lua-argparse'
 else
     echo
@@ -120,7 +120,7 @@ fi
 
 # Install the required packages for sqm-autorate ...
 echo ">>> Installing required packages via opkg..."
-install="opkg install -V0 libuci-lua lua luarocks lua-bit32 luaposix lualanes tar ${lua_argparse} ${curl}"
+install="apk add libuci-lua lua luarocks lua-bit32 luaposix lualanes tar ${lua_argparse} ${curl}"
 $install
 
 echo ">>> Installing required packages via luarocks..."
